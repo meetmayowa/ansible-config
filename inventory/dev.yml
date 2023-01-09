@@ -3,4 +3,4 @@
 172.31.88.60 ansible_ssh_user='ec2-user'
 
 [db]
-172.31.84.239 ansible_ssh_user='ubuntu' 
+172.31.84.239 ansible_ssh_user='ubuntu' ansible_ssh_private_key_file=/home/ubuntu/ansible-config/new-key.pem
