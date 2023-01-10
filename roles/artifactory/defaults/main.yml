@@ -1,0 +1,3 @@
+---
+chocolatey_mirror_username: "{{ ansible_deployment_artifactory_user }}"
+chocolatey_mirror_password: "{{ ansible_deployment_artifactory_key }}"
