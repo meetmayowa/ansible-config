@@ -1,8 +1,0 @@
----
-# We have no artifactory EPEL mirror for CentOS 8 so we'll just install the distribution's own
-- name: Enable EPEL
-  ansible.builtin.package:
-    name:
-      - epel-release
-    state: present
-  become: true
