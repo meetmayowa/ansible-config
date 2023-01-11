@@ -1,0 +1,36 @@
+---
+- name: Ensure Chocolatey is installed
+  chocolatey.chocolatey.win_chocolatey:
+    name: chocolatey
+    state: present
+  become: true
+
+- name: Remove default Chocolatey source and old CCDC sources
+  chocolatey.chocolatey.win_chocolatey_source:
+    name: "{{ source }}"
+    state: absent
+  loop:
+    - "chocolatey"
+    - "ccdc chocolatey mirror"
+    - "internal repo"
+  loop_control:
+    loop_var: source
+  become: true
+
+- name: Add ccdc artifactory chocolatey source
+  chocolatey.chocolatey.win_chocolatey_source:
+    name: artifactory-mirror
+    state: present
+    source: https://artifactory.ccdc.cam.ac.uk/artifactory/api/nuget/public-chocolatey
+    source_username: "{{ chocolatey_mirror_username }}"
+    source_password: "{{ chocolatey_mirror_password }}"
+  become: true
+
+- name: Add ccdc artifactory chocolatey source for internal packages
+  chocolatey.chocolatey.win_chocolatey_source:
+    name: ccdc-chocolatey
+    state: present
+    source: https://artifactory.ccdc.cam.ac.uk/artifactory/api/nuget/ccdc-chocolatey
+    source_username: "{{ chocolatey_mirror_username }}"
+    source_password: "{{ chocolatey_mirror_password }}"
+  become: true
